@@ -45,12 +45,33 @@ namespace Ean13Barcode2005
 		private string _sProductCode;
 		private string _sChecksumDigit;
 
+	    private int lengthOfCountryCode = 2;
+	    private int lengthOfManufacturerCode = 5;
+	    private int lengthOfProduceCode = 5;
+	    private int lengthOfCheckSum = 1;
+
 		public Ean13( )
 		{
 
 		}
 
-		public Ean13( string mfgNumber, string productId )
+	    public Ean13(string ean13)
+	    {
+	        if (string.IsNullOrEmpty(ean13))
+	        {
+                throw new ArgumentNullException($"{nameof(ean13)} is null.");
+	        }
+	        if (ean13.Length != 13)
+	        {
+                throw  new ArgumentException($"Length of {nameof(ean13)} must be 13.");
+	        }
+	        CountryCode = ean13.Substring(0, lengthOfCountryCode);
+	        ManufacturerCode = ean13.Substring(lengthOfCountryCode, lengthOfManufacturerCode);
+	        ProductCode = ean13.Substring(lengthOfCountryCode + lengthOfManufacturerCode, lengthOfProduceCode);
+	        ChecksumDigit = ean13.Substring(ean13.Length - lengthOfCheckSum, lengthOfCheckSum);
+	    }
+
+	    public Ean13( string mfgNumber, string productId )
 		{
 			this.CountryCode = "00";
 			this.ManufacturerCode = mfgNumber;
