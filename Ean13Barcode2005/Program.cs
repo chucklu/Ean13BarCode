@@ -17,7 +17,6 @@ namespace Ean13Barcode2005
 		static void Main( )
 		{
 			Application.EnableVisualStyles( );
-			Application.EnableRTLMirroring( );
 			Application.Run( new frmEan13( ) );
 		}
 	}
