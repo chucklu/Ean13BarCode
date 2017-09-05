@@ -16,7 +16,11 @@ namespace Ean13Barcode2005
 		{
 			InitializeComponent( );
 			cboScale.SelectedIndex = 2;
-        }
+
+		    butPrint.Enabled = false;
+		    StartPosition = FormStartPosition.CenterScreen;
+
+		}
 
 	    private void CreateEan13( )
 		{
