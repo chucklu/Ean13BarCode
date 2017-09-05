@@ -15,11 +15,13 @@ namespace Ean13Barcode2005
 		public frmEan13( )
 		{
 			InitializeComponent( );
-			cboScale.SelectedIndex = 2;
+
+		    cboScale.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboScale.SelectedIndexChanged += cboScale_SelectedIndexChanged;
+            cboScale.SelectedIndex = 2;
 
 		    butPrint.Enabled = false;
 		    StartPosition = FormStartPosition.CenterScreen;
-
 		}
 
 	    private void CreateEan13( )
@@ -72,7 +74,16 @@ namespace Ean13Barcode2005
             Bitmap bmp = ean13.CreateBitmap();
             picBarcode.Image = bmp;
         }
-
-    }
+        
+        private void cboScale_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ean13 == null)
+            {
+                return;
+            }
+            ean13.Scale = (float)Convert.ToDecimal(cboScale.Items[cboScale.SelectedIndex]);
+            picBarcode.Image = ean13.CreateBitmap();
+        }
+	}
 }
 
