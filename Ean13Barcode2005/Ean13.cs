@@ -97,6 +97,12 @@ namespace Ean13Barcode2005
 
 		public void DrawEan13Barcode( System.Drawing.Graphics g, System.Drawing.Point pt )
 		{
+		    if (string.IsNullOrEmpty(ManufacturerCode)
+		        ||
+		        string.IsNullOrEmpty(ProductCode))
+		    {
+		        throw new Exception($"Please input {nameof(ManufacturerCode)} and {nameof(ProductCode)}");
+		    }
 			float width = this.Width * this.Scale;
 			float height = this.Height * this.Scale;
 
