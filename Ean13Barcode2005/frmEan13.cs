@@ -22,9 +22,27 @@ namespace Ean13Barcode2005
 
 		    butPrint.Enabled = false;
 		    StartPosition = FormStartPosition.CenterScreen;
-		}
 
-	    private void CreateEan13( )
+#if DEBUG
+		    Test();
+#endif
+        }
+
+        private void Test()
+	    {
+	        ean13 = new Ean13("9780201734843");
+	        ean13.Scale = (float)Convert.ToDecimal(cboScale.Items[cboScale.SelectedIndex]);
+
+	        txtCountryCode.Text = ean13.CountryCode;
+	        txtManufacturerCode.Text = ean13.ManufacturerCode;
+	        txtProductCode.Text = ean13.ProductCode;
+	        txtChecksumDigit.Text = ean13.ChecksumDigit;
+
+	        Bitmap bmp = ean13.CreateBitmap();
+	        this.picBarcode.Image = bmp;
+	    }
+
+        private void CreateEan13( )
 		{
 			ean13 = new Ean13( );
 			ean13.CountryCode = txtCountryCode.Text;
